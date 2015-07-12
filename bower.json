@@ -1,0 +1,37 @@
+{
+  "name": "dpdatepicker",
+  "description": "Datepicker - AngularJS reusable UI component",
+  "version": "0.0.1",
+  "homepage": "http://kekeh.github.io/dpdatepicker",
+  "license": "MIT",
+  "authors": [
+    "kekeh"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kekeh/dpdatepicker.git"
+  },
+  "main": [
+    "dist/min/dpdatepicker-0.0.1.min.css",
+    "dist/min/dpdatepicker-0.0.1.min.js"
+  ],
+  "keywords": [
+    "AngularJS",
+    "dpdatepicker",
+    "datepicker"
+  ],
+  "ignore": [
+    "**/.*",
+    "Gruntfile.js",
+    "karma.conf.js",
+    "node_modules",
+    "bower_components",
+    "css",
+    "js",
+    "templates",
+    "test"
+  ],
+  "dependencies": {
+    "angular": "1.3.x"
+  }
+}
