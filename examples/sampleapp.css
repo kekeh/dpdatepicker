@@ -3,7 +3,7 @@ body {
     min-width: 400px;
 }
 
-h3, h5, p {
+h3, h5 {
     background-color: #78FA89;
     padding: 8px;
     border: 1px solid #AAA;
@@ -11,6 +11,38 @@ h3, h5, p {
 }
 
 p {
+    background-color: #FAFAFA;
+    padding: 4px;
+    border: 1px solid #AAA;
+    border-radius: 3px;
     font-size: 14px;
 }
 
+
+@media screen and (max-width: 1100px) {
+    body
+    {
+        margin: 20px 300px 20px 300px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    body
+    {
+        margin: 20px 200px 20px 200px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    body
+    {
+        margin: 20px 100px 20px 100px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    body
+    {
+        margin: 20px 10px 20px 10px;
+    }
+}
