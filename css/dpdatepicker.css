@@ -183,7 +183,8 @@
 .dpdatepicker .dpheaderbtn,
 .dpdatepicker .dpheadermonthtxt,
 .dpdatepicker .dpheaderyeartxt,
-.dpdatepicker .dpheadertodaybtn {
+.dpdatepicker .dpheadertodaybtn,
+.dpdatepicker .dpselection {
     color: #000;
 }
 
