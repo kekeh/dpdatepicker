@@ -35,7 +35,7 @@ angular.module("templates/dpdatepicker.html", []).run(["$templateCache", functio
     "                    </div>\n" +
     "                </td>\n" +
     "                <td>\n" +
-    "                    <button class=\"dpheadertodatbtn\" ng-click=\"today()\">{{options.todayBtnText}}</button>\n" +
+    "                    <button class=\"dpheadertodaybtn\" ng-click=\"today()\">{{options.todayBtnText}}</button>\n" +
     "                </td>\n" +
     "                <td>\n" +
     "                    <div style=\"float:right\">\n" +
