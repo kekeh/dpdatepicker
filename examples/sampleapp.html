@@ -13,16 +13,26 @@
     </head>
 
     <body ng-app="sampleapp">
-        <div ng-controller="samplectrl">
-            <h3>Datepicker - AngularJS directive</h3>
+        <h3>Datepicker - AngularJS directive</h3>
 
-            <div ng-controller="samplectrl">
+        <div ng-controller="samplectrl1">
 
-                <dpdatepicker options="opt"></dpdatepicker>
+            <p>Selector close on click set, Date format (dd.mm.yyyy)</p>
 
-            </div>               
-            
+            <dpdatepicker options="opt"></dpdatepicker>
+
         </div>
+
+        <hr/>
+
+        <div ng-controller="samplectrl2">
+
+            <p>Initial date set (2013-09-16), initial month set (Aug 2010). Date format (yyyy-mm-dd)</p>
+
+            <dpdatepicker options="opt"></dpdatepicker>
+
+        </div>
+
     </body>    
 
 </html>

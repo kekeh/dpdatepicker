@@ -60,16 +60,45 @@ sampleapp.controller('sampleappctrl', function ($scope) {
 
     // Watch the user selections - invoked when the user select the date
     function onDateSelect(year, month, day, formatted) {
-        console.log('PARENT - onDateSelect(): year: ', year, ' - month: ', month, ' - day: ', day, ' - formatted: ', formatted);
+        console.log('PARENT - onDateSelect(): year: ', year, ' - month: ', month, ' - day: ', day, 
+                                    ' - formatted: ', formatted);
     }
 
     // Configuration of the dpdatepicker
     $scope.opt = {
-        initSelectorMonth: {year: 2014, month: 8},
-        initSelectedDate: {year: 2013, month: 9, day: 16},
+        initSelectorMonth: {
+            year: 2010,
+            month: 8
+        },
+        initSelectedDate: {
+            year: 2013,
+            month: 9,
+            day: 16
+        },
         dateFormat: 'yyyy-mm-dd',
-        monthLabels: {1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr', 5: 'May', 6: 'Jun', 7: 'Jul', 8: 'Aug', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dec'},
-        dayLabels: {su: 'Sun', mo: 'Mon', tu: 'Tue', we: 'Wed', th: 'Thu', fr: 'Fri', sa: 'Sat'},
+        monthLabels: {
+            1: 'Jan',
+            2: 'Feb',
+            3: 'Mar',
+            4: 'Apr',
+            5: 'May',
+            6: 'Jun',
+            7: 'Jul',
+            8: 'Aug',
+            9: 'Sep',
+            10: 'Oct',
+            11: 'Nov',
+            12: 'Dec'
+        },
+        dayLabels: {
+            su: 'Sun',
+            mo: 'Mon',
+            tu: 'Tue',
+            we: 'Wed',
+            th: 'Thu',
+            fr: 'Fri',
+            sa: 'Sat'
+        },
         sunRedColor: true,
         closeOnSelect: false,
         todayBtnText: 'Today',

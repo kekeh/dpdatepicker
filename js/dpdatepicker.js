@@ -22,7 +22,7 @@ angular.module('dpdatepicker', [])
     .directive('dpdatepicker', ['$timeout', '$document', function ($timeout, $document) {
         return {
             restrict: 'EA',
-            templateUrl: '../templates/dpdatepicker.html',
+            templateUrl: 'templates/dpdatepicker.html',
             scope: {
                 options: '='
             },
