@@ -2,7 +2,7 @@
     height: 32px;
     width: 164px;
     border: 1px solid #BBB;
-    border-radius: 2px; 
+    border-radius: 2px;
 }
 
 .dpdatepicker * {
@@ -112,15 +112,15 @@
     background-color: #FFF;
 }
 
-.dpdatepicker .dptable, 
-.dpdatepicker .dptable th, 
+.dpdatepicker .dptable,
+.dpdatepicker .dptable th,
 .dpdatepicker .dptable td {
     border: 1px solid #BBB;
     border-collapse: collapse;
     color: #003366;
 }
 
-.dpdatepicker .dptable th, 
+.dpdatepicker .dptable th,
 .dpdatepicker .dptable td {
     padding: 5px;
     text-align: center;
