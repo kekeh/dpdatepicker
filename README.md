@@ -173,7 +173,7 @@ bower install vsdropdown
 ```
 
 ## Compatibility (tested with)
-* IE 10+
+* IE 9+
 * Firefox 36
 * Google Chrome 41
 * Opera 28.0
