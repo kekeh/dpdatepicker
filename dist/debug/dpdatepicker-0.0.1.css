@@ -87,6 +87,7 @@
 
 .dpdatepicker .dpheader td {
     vertical-align: middle;
+    border: none;
 }
 
 .dpdatepicker .dpheader td:nth-child(1) {
@@ -118,6 +119,7 @@
     border: 1px solid #BBB;
     border-collapse: collapse;
     color: #003366;
+    line-height: 1.1;
 }
 
 .dpdatepicker .dptable th, 
