@@ -66,7 +66,7 @@ sampleapp.controller('samplectrl2', function ($scope) {
     // Configuration of the dpdatepicker
     $scope.opt = {
         initSelectorMonth: {
-            year: 2010,
+            year: 2011,
             month: 8
         },
         initSelectedDate: {
@@ -101,6 +101,10 @@ sampleapp.controller('samplectrl2', function ($scope) {
         sunRedColor: true,
         closeOnSelect: false,
         todayBtnText: 'Today',
+        footer: {
+            visible: true,
+            closeBtnText: 'Close'
+        },
         dateSelectCb: onDateSelect
     };
 });

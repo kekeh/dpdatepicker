@@ -28,12 +28,11 @@ angular.module('dpdatepicker', [])
             },
             controller: ['$scope', 'dpdatepickerConfig', function ($scope, dpdatepickerConfig) {
                 $scope.config = dpdatepickerConfig;
-
             }],
             link: function (scope, element, attrs) {
                 scope.weekDays = [];
                 scope.selectionDayTxt = '';
-                scope.selectedDay = {day: 0, month: 0, year: 0};
+                scope.selectedDate = {day: 0, month: 0, year: 0};
                 scope.visibleMonth = {monthTxt: '', monthNbr: 0, year: 0};
                 scope.dates = [];
                 scope.showSelector = false;
@@ -87,11 +86,12 @@ angular.module('dpdatepicker', [])
                 scope.cellClicked = function (cell) {
                     // Cell clicked in the selector
                     if (cell.cmo === scope.config.PREV_MONTH) {
-                        // Previous of month day
+                        // Previous month of day
                         scope.prevMonth();
                     }
                     else if (cell.cmo === scope.config.CURR_MONTH) {
-                        // Current of month day
+                        // Current month of day
+                        scope.selectedDate = {day: cell.day, month: cell.month, year: cell.year};
                         formatDate(cell);
                         if (scope.options.closeOnSelect) {
                             scope.showSelector = false;
@@ -101,7 +101,7 @@ angular.module('dpdatepicker', [])
                         }
                     }
                     else if (cell.cmo === scope.config.NEXT_MONTH) {
-                        // Next of month day
+                        // Next month of day
                         scope.nextMonth();
                     }
                 };
@@ -109,6 +109,26 @@ angular.module('dpdatepicker', [])
                 scope.picker = function () {
                     // Show or hide selector
                     scope.showSelector = !scope.showSelector;
+                    if (scope.showSelector) {
+                        var y = 0;
+                        var m = 0;
+
+                        // Initial selector month
+                        if (scope.options.initSelectorMonth === undefined) {
+                            y = today.getFullYear();
+                            m = today.getMonth() + 1;
+                        }
+                        else {
+                            y = scope.options.initSelectorMonth.year;
+                            m = scope.options.initSelectorMonth.month;
+                        }
+
+                        // Set current month
+                        scope.visibleMonth = {monthTxt: scope.options.monthLabels[m], monthNbr: m, year: y};
+
+                        // Create current month
+                        createMonth(m, y);
+                    }
                 };
 
                 scope.$watch('visibleMonth', function (newVal, oldVal) {
@@ -120,7 +140,6 @@ angular.module('dpdatepicker', [])
 
 
                 function formatDate(val) {
-                    scope.selectedDay = {day: val.day, month: val.month, year: val.year};
                     var fmt = angular.copy(scope.options.dateFormat);
                     scope.selectionDayTxt = fmt.replace(scope.config.YEAR_CONST, val.year)
                         .replace(scope.config.MONTH_CONST, preZero(val.month))
@@ -245,9 +264,6 @@ angular.module('dpdatepicker', [])
                 });
 
                 function init() {
-                    var y = 0;
-                    var m = 0;
-
                     // Selection element height
                     scope.elemHeight = element.children().prop('offsetHeight') - 2;
 
@@ -257,26 +273,11 @@ angular.module('dpdatepicker', [])
                         scope.weekDays.push(scope.options.dayLabels[days[i]]);
                     }
 
-                    // Initial selector month
-                    if (scope.options.initSelectorMonth === undefined) {
-                        y = today.getFullYear();
-                        m = today.getMonth() + 1;
-                    }
-                    else {
-                        y = scope.options.initSelectorMonth.year;
-                        m = scope.options.initSelectorMonth.month;
-                    }
-
                     // Initial selected date
                     if (scope.options.initSelectedDate !== undefined) {
                         formatDate(scope.options.initSelectedDate);
+                        scope.selectedDate = angular.copy(scope.options.initSelectedDate);
                     }
-
-                    // Set current month
-                    scope.visibleMonth = {monthTxt: scope.options.monthLabels[m], monthNbr: m, year: y};
-
-                    // Create current month
-                    createMonth(m, y);
 
                     // Register outside of element click event
                     $document.on("click", onOutClick);

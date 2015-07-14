@@ -2,7 +2,7 @@
     <div class="dpselectiongroup">
         <span class="dpselection" ng-style="{'line-height': elemHeight + 'px'}" ng-click="picker()">{{selectionDayTxt}}</span>
         <span class="dpselbtngroup" ng-style="{'height': elemHeight + 'px'}">
-            <button class="dpbtnclear" ng-show="selectionDayTxt.length > 0" ng-click="selectionDayTxt='';selectedDay={day:0,month:0,year:0}">
+            <button class="dpbtnclear" ng-show="selectionDayTxt.length > 0" ng-click="selectionDayTxt='';selectedDate={day:0,month:0,year:0}">
                 <span class="icon icon-cross"></span>
             </button>
             <button class="dpbtnpicker" ng-click="picker()">
@@ -41,7 +41,7 @@
                     <td ng-repeat="d in w track by $index" 
                         ng-class="{'dpcurrmonth':d.cmo===config.CURR_MONTH, 
                                    'dpcurrday':d.currDay,
-                                   'dpselectedday':selectedDay.day===d.day && selectedDay.month===d.month && selectedDay.year===d.year && d.cmo===config.CURR_MONTH}" 
+                                   'dpselectedday':selectedDate.day===d.day && selectedDate.month===d.month && selectedDate.year===d.year && d.cmo===config.CURR_MONTH}"
                         ng-click="cellClicked(d)">
                         <span style="background-color:inherit" 
                               ng-class="{'dpprevmonth':d.cmo===config.PREV_MONTH,'dpcurrmonth':d.cmo===config.CURR_MONTH,'dpnextmonth':d.cmo===config.NEXT_MONTH,
@@ -50,5 +50,10 @@
                 </tr>
             </tbody>
         </table>
+
+        <div class="dpfooterarea" ng-if="options.footer !== undefined && options.footer.visible">
+            <button class="dpfooterbtn" ng-click="picker()">{{options.footer.closeBtnText}}</button>
+        </div>
+
     </div>
 </div> 
