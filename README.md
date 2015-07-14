@@ -169,7 +169,7 @@ grunt
 ## Installation
 * Installation can be done using the **bower**. It installs files from the **dist/debug** and the **dist/min** folders. Needed CSS and javascript files are located in these folders.
 ```js
-bower install vsdropdown
+bower install dpdatepicker
 ```
 
 ## Compatibility (tested with)
