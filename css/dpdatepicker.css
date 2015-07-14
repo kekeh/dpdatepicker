@@ -110,17 +110,15 @@
 }
 
 .dpdatepicker .dpfooterarea {
-    height: 32px;
     border: 1px solid #BBB;
     margin-top: 4px;
+    padding: 3px;
     text-align: center;
     background-color: #FAFAFA;
 }
 
 .dpdatepicker .dpfooterbtn {
     width: 80px;
-    height: 22px;
-    margin-top: 4px;
 }
 
 .dpdatepicker .dptable {
@@ -200,7 +198,8 @@
 .dpdatepicker .dpheadermonthtxt,
 .dpdatepicker .dpheaderyeartxt,
 .dpdatepicker .dpheadertodaybtn,
-.dpdatepicker .dpselection {
+.dpdatepicker .dpselection,
+.dpdatepicker .dpfooterbtn {
     color: #000;
 }
 
@@ -208,7 +207,9 @@
 .dpdatepicker .dpfooterbtn {
     padding: 2px 6px;
     border: 1px solid #BBB;
+    border-radius: 2px;
     cursor: pointer;
+    font-size: 12px;
 }
 
 .dpdatepicker button::-moz-focus-inner {
