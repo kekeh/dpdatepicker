@@ -67,7 +67,6 @@ angular.module("templates/dpdatepicker.html", []).run(["$templateCache", functio
     "        <div class=\"dpfooterarea\" ng-if=\"options.footer !== undefined && options.footer.visible\">\n" +
     "            <button class=\"dpfooterbtn\" ng-click=\"picker()\">{{options.footer.closeBtnText}}</button>\n" +
     "        </div>\n" +
-    "\n" +
     "    </div>\n" +
     "</div> \n" +
     "");
