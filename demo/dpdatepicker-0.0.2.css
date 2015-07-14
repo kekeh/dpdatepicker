@@ -39,9 +39,10 @@
     position: absolute;
     width: 100%;
     text-align: left;
-    font-size: 18px;
+    font-size: 14px;
     font-weight: bold;
-    padding-left: 6px;
+    padding-right: 60px;
+    text-align: center;
 }
 
 .dpdatepicker .dpselbtngroup {
@@ -69,7 +70,8 @@
 
 .dpdatepicker .dpbtnpicker,
 .dpdatepicker .dpbtnclear,
-.dpdatepicker .dpheadertodaybtn {
+.dpdatepicker .dpheadertodaybtn,
+.dpdatepicker .dpfooterbtn {
     background: #FAFAFA;
     background-image: -webkit-linear-gradient(#F0F0F0 30%, #AEC2E1 100%);
     background-image: -moz-linear-gradient(#F0F0F0 30%, #AEC2E1 100%);
@@ -105,6 +107,18 @@
     font-size: 16px;
     text-align: right;
     padding-right: 4px;
+}
+
+.dpdatepicker .dpfooterarea {
+    border: 1px solid #BBB;
+    margin-top: 4px;
+    padding: 3px;
+    text-align: center;
+    background-color: #FAFAFA;
+}
+
+.dpdatepicker .dpfooterbtn {
+    width: 80px;
 }
 
 .dpdatepicker .dptable {
@@ -184,14 +198,18 @@
 .dpdatepicker .dpheadermonthtxt,
 .dpdatepicker .dpheaderyeartxt,
 .dpdatepicker .dpheadertodaybtn,
-.dpdatepicker .dpselection {
+.dpdatepicker .dpselection,
+.dpdatepicker .dpfooterbtn {
     color: #000;
 }
 
-.dpdatepicker .dpheadertodaybtn {
+.dpdatepicker .dpheadertodaybtn,
+.dpdatepicker .dpfooterbtn {
     padding: 2px 6px;
     border: 1px solid #BBB;
+    border-radius: 2px;
     cursor: pointer;
+    font-size: 12px;
 }
 
 .dpdatepicker button::-moz-focus-inner {
@@ -205,8 +223,10 @@
     display: table-cell;
 }
 
-.dpdatepicker button:focus,
-.dpdatepicker button:hover {
+.dpdatepicker .dpbtnclear:focus,
+.dpdatepicker .dpbtnpicker:focus,
+.dpdatepicker .dpbtnclear:hover,
+.dpdatepicker .dpbtnpicker:hover {
     background: #ADD8E6;
 }
 
