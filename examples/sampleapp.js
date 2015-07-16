@@ -43,9 +43,12 @@ sampleapp.controller('samplectrl1', function ($scope) {
             fr: 'Fri',
             sa: 'Sat'
         },
+        todayBtnText: 'Today',
         sunRedColor: true,
         closeOnSelect: true,
-        todayBtnText: 'Today',
+        footer: {
+            visible: false
+        },
         dateSelectCb: onDateSelect
     };
 });
@@ -61,7 +64,6 @@ sampleapp.controller('samplectrl2', function ($scope) {
     function onDateSelect(year, month, day, formatted) {
         console.log('PARENT 2 - onDateSelect(): year: ', year, ' - month: ', month, ' - day: ', day, ' - formatted: ', formatted);
     }
-
 
     // Configuration of the dpdatepicker
     $scope.opt = {
@@ -98,12 +100,12 @@ sampleapp.controller('samplectrl2', function ($scope) {
             fr: 'Fri',
             sa: 'Sat'
         },
+        todayBtnText: 'Today',
         sunRedColor: true,
         closeOnSelect: false,
-        todayBtnText: 'Today',
         footer: {
             visible: true,
-            closeBtnText: 'Close'
+            okBtnText: 'OK'
         },
         dateSelectCb: onDateSelect
     };

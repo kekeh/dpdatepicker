@@ -1,24 +1,24 @@
 /* 
 *  Name: dpdatepicker 
 *  Description: Datepicker - AngularJS reusable UI component 
-*  Version: 0.0.2 
+*  Version: 0.0.3 
 *  Author: kekeh 
 *  Homepage: http://kekeh.github.io/dpdatepicker 
 *  License: MIT 
-*  Date: 2015-07-14 
+*  Date: 2015-07-16 
 */ 
-angular.module('template-dpdatepicker-0.0.2.html', ['templates/dpdatepicker.html']);
+angular.module('template-dpdatepicker-0.0.3.html', ['templates/dpdatepicker.html']);
 
 angular.module("templates/dpdatepicker.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/dpdatepicker.html",
     "<div class=\"dpdatepicker\">\n" +
-    "    <div class=\"dpselectiongroup\">\n" +
-    "        <span class=\"dpselection\" ng-style=\"{'line-height': elemHeight + 'px'}\" ng-click=\"picker()\">{{selectionDayTxt}}</span>\n" +
+    "    <div class=\"dpselectiongroup\" ng-click=\"picker($event)\">\n" +
+    "        <span class=\"dpselection\" ng-style=\"{'line-height': elemHeight + 'px'}\" ng-click=\"picker($event)\">{{selectionDayTxt}}</span>\n" +
     "        <span class=\"dpselbtngroup\" ng-style=\"{'height': elemHeight + 'px'}\">\n" +
-    "            <button class=\"dpbtnclear\" ng-show=\"selectionDayTxt.length > 0\" ng-click=\"selectionDayTxt='';selectedDate={day:0,month:0,year:0}\">\n" +
+    "            <button class=\"dpbtnclear\" ng-show=\"selectionDayTxt.length > 0\" ng-click=\"clearSelection($event)\">\n" +
     "                <span class=\"icon icon-cross\"></span>\n" +
     "            </button>\n" +
-    "            <button class=\"dpbtnpicker\" ng-click=\"picker()\">\n" +
+    "            <button class=\"dpbtnpicker\" ng-click=\"picker($event)\">\n" +
     "                <span class=\"icon icon-calendar\"></span>\n" +
     "            </button>\n" +
     "        </span>\n" +
@@ -65,14 +65,14 @@ angular.module("templates/dpdatepicker.html", []).run(["$templateCache", functio
     "        </table>\n" +
     "\n" +
     "        <div class=\"dpfooterarea\" ng-if=\"options.footer !== undefined && options.footer.visible\">\n" +
-    "            <button class=\"dpfooterbtn\" ng-click=\"picker()\">{{options.footer.closeBtnText}}</button>\n" +
+    "            <button class=\"dpfooterbtn\" ng-class=\"{'dpbtndisable': selectedDate.day===0}\" ng-disabled=\"selectedDate.day===0\" ng-click=\"accept()\">{{options.footer.okBtnText}}</button>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "</div> \n" +
     "");
 }]);
 
-angular.module('dpdatepicker', ["template-dpdatepicker-0.0.2.html"])
+angular.module('dpdatepicker', ["template-dpdatepicker-0.0.3.html"])
 
 /**
  * @ngdoc object
@@ -166,11 +166,11 @@ angular.module('dpdatepicker', ["template-dpdatepicker-0.0.2.html"])
                     else if (cell.cmo === scope.config.CURR_MONTH) {
                         // Current month of day
                         scope.selectedDate = {day: cell.day, month: cell.month, year: cell.year};
-                        formatDate(cell);
                         if (scope.options.closeOnSelect) {
+                            formatDate(cell);
                             scope.showSelector = false;
                         }
-                        if (scope.options.dateSelectCb) {
+                        if (scope.options.closeOnSelect && scope.options.dateSelectCb) {
                             scope.options.dateSelectCb(cell.year, cell.month, cell.day, scope.selectionDayTxt);
                         }
                     }
@@ -180,13 +180,13 @@ angular.module('dpdatepicker', ["template-dpdatepicker-0.0.2.html"])
                     }
                 };
 
-                scope.picker = function () {
+                scope.picker = function (event) {
                     // Show or hide selector
+                    event.stopPropagation();
                     scope.showSelector = !scope.showSelector;
                     if (scope.showSelector) {
                         var y = 0;
                         var m = 0;
-
                         // Initial selector month
                         if (scope.options.initSelectorMonth === undefined) {
                             y = today.getFullYear();
@@ -203,6 +203,22 @@ angular.module('dpdatepicker', ["template-dpdatepicker-0.0.2.html"])
                         // Create current month
                         createMonth(m, y);
                     }
+                };
+
+                scope.clearSelection = function (event) {
+                    // Clear selected range
+                    event.stopPropagation();
+                    scope.selectionDayTxt = '';
+                    scope.selectedDate = {day: 0, month: 0, year: 0};
+                };
+
+                scope.accept = function () {
+                    // OK button clicked
+                    formatDate(scope.selectedDate);
+                    if (scope.options.dateSelectCb) {
+                        scope.options.dateSelectCb(scope.selectedDate.year, scope.selectedDate.month, scope.selectedDate.day, scope.selectionDayTxt);
+                    }
+                    scope.showSelector = false;
                 };
 
                 scope.$watch('visibleMonth', function (newVal, oldVal) {

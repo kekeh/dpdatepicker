@@ -1,11 +1,11 @@
 <div class="dpdatepicker">
-    <div class="dpselectiongroup">
-        <span class="dpselection" ng-style="{'line-height': elemHeight + 'px'}" ng-click="picker()">{{selectionDayTxt}}</span>
+    <div class="dpselectiongroup" ng-click="picker($event)">
+        <span class="dpselection" ng-style="{'line-height': elemHeight + 'px'}" ng-click="picker($event)">{{selectionDayTxt}}</span>
         <span class="dpselbtngroup" ng-style="{'height': elemHeight + 'px'}">
-            <button class="dpbtnclear" ng-show="selectionDayTxt.length > 0" ng-click="selectionDayTxt='';selectedDate={day:0,month:0,year:0}">
+            <button class="dpbtnclear" ng-show="selectionDayTxt.length > 0" ng-click="clearSelection($event)">
                 <span class="icon icon-cross"></span>
             </button>
-            <button class="dpbtnpicker" ng-click="picker()">
+            <button class="dpbtnpicker" ng-click="picker($event)">
                 <span class="icon icon-calendar"></span>
             </button>
         </span>
@@ -52,7 +52,7 @@
         </table>
 
         <div class="dpfooterarea" ng-if="options.footer !== undefined && options.footer.visible">
-            <button class="dpfooterbtn" ng-click="picker()">{{options.footer.closeBtnText}}</button>
+            <button class="dpfooterbtn" ng-class="{'dpbtndisable': selectedDate.day===0}" ng-disabled="selectedDate.day===0" ng-click="accept()">{{options.footer.okBtnText}}</button>
         </div>
     </div>
 </div> 

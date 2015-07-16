@@ -1,4 +1,4 @@
-# dpdatepicker v. 0.0.2
+# dpdatepicker v. 0.0.3
 
 **Datepicker - AngularJS reusable UI component**
 
@@ -7,10 +7,10 @@ Simple AngularJS directive which implements the date picker. Depends on only the
 
 ## Usage
 
-* include the **dpdatepicker-0.0.2.min.js** and the **dpdatepicker-0.0.2.min.css** files into your project. See the **Build project** and the **Installation** chapters below.
+* include the **dpdatepicker-0.0.3.min.js** and the **dpdatepicker-0.0.3.min.css** files into your project. See the **Build project** and the **Installation** chapters below.
 ```html
-<script src="dpdatepicker-0.0.2.min.js"></script>
-<link href="dpdatepicker-0.0.2.min.css" rel="stylesheet" type="text/css">
+<script src="dpdatepicker-0.0.3.min.js"></script>
+<link href="dpdatepicker-0.0.3.min.css" rel="stylesheet" type="text/css">
 ```
 * inject the **dpdatepicker** module into your application module.
 ```js
@@ -50,6 +50,9 @@ angular.module('sampleapp', ['dpdatepicker']);
 | **sunRedColor** | Is sundays color red or not. | true or false | yes |
 | **closeOnSelect** | Is selector closed on date click or not. | true or false | yes |
 | **todayBtnText** | Today button text. | text | yes |
+| **footer** | Object which contain the sub properties. | See below | yes |
+| footer.**visible** | Is footer visible or not. | true or false | yes 
+| footer.**okBtnText** | OK button text. | text | yes if previous is **true**
 | **dateSelectCb** | Date select callback function. See below. | function | no |
 
 
@@ -60,14 +63,13 @@ sampleapp.controller('sampleappctrl', function ($scope) {
 
     // Watch the user selections - invoked when the user select the date
     function onDateSelect(year, month, day, formatted) {
-        console.log('PARENT - onDateSelect(): year: ', year, ' - month: ', month, ' - day: ', day, 
-                                    ' - formatted: ', formatted);
+        console.log('onDateSelect(): year: ', year, ' - month: ', month, ' - day: ', day, ' - formatted: ', formatted);
     }
 
     // Configuration of the dpdatepicker
     $scope.opt = {
         initSelectorMonth: {
-            year: 2010,
+            year: 2011,
             month: 8
         },
         initSelectedDate: {
@@ -99,9 +101,13 @@ sampleapp.controller('sampleappctrl', function ($scope) {
             fr: 'Fri',
             sa: 'Sat'
         },
+        todayBtnText: 'Today',
         sunRedColor: true,
         closeOnSelect: false,
-        todayBtnText: 'Today',
+        footer: {
+            visible: true,
+            okBtnText: 'OK'
+        },
         dateSelectCb: onDateSelect
     };
 ```

@@ -216,6 +216,11 @@
     font-size: 12px;
 }
 
+.dpdatepicker .dpbtndisable {
+    cursor: default;
+    opacity: 0.5;
+}
+
 .dpdatepicker button::-moz-focus-inner {
     border: 0;
 }

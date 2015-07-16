@@ -92,11 +92,11 @@ angular.module('dpdatepicker', [])
                     else if (cell.cmo === scope.config.CURR_MONTH) {
                         // Current month of day
                         scope.selectedDate = {day: cell.day, month: cell.month, year: cell.year};
-                        formatDate(cell);
                         if (scope.options.closeOnSelect) {
+                            formatDate(cell);
                             scope.showSelector = false;
                         }
-                        if (scope.options.dateSelectCb) {
+                        if (scope.options.closeOnSelect && scope.options.dateSelectCb) {
                             scope.options.dateSelectCb(cell.year, cell.month, cell.day, scope.selectionDayTxt);
                         }
                     }
@@ -106,13 +106,13 @@ angular.module('dpdatepicker', [])
                     }
                 };
 
-                scope.picker = function () {
+                scope.picker = function (event) {
                     // Show or hide selector
+                    event.stopPropagation();
                     scope.showSelector = !scope.showSelector;
                     if (scope.showSelector) {
                         var y = 0;
                         var m = 0;
-
                         // Initial selector month
                         if (scope.options.initSelectorMonth === undefined) {
                             y = today.getFullYear();
@@ -129,6 +129,22 @@ angular.module('dpdatepicker', [])
                         // Create current month
                         createMonth(m, y);
                     }
+                };
+
+                scope.clearSelection = function (event) {
+                    // Clear selected range
+                    event.stopPropagation();
+                    scope.selectionDayTxt = '';
+                    scope.selectedDate = {day: 0, month: 0, year: 0};
+                };
+
+                scope.accept = function () {
+                    // OK button clicked
+                    formatDate(scope.selectedDate);
+                    if (scope.options.dateSelectCb) {
+                        scope.options.dateSelectCb(scope.selectedDate.year, scope.selectedDate.month, scope.selectedDate.day, scope.selectionDayTxt);
+                    }
+                    scope.showSelector = false;
                 };
 
                 scope.$watch('visibleMonth', function (newVal, oldVal) {
