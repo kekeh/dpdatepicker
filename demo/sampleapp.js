@@ -45,6 +45,9 @@ sampleapp.controller('samplectrl1', function ($scope) {
         },
         sunRedColor: true,
         closeOnSelect: true,
+        footer: {
+            visible: false
+        },
         todayBtnText: 'Today',
         dateSelectCb: onDateSelect
     };
@@ -103,7 +106,7 @@ sampleapp.controller('samplectrl2', function ($scope) {
         todayBtnText: 'Today',
         footer: {
             visible: true,
-            closeBtnText: 'Close'
+            okBtnText: 'OK'
         },
         dateSelectCb: onDateSelect
     };
