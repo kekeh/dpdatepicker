@@ -1,13 +1,13 @@
 /* 
  *  Name: dpdatepicker
  *  Description: Datepicker - AngularJS reusable UI component
- *  Version: 0.0.3
+ *  Version: 0.0.4
  *  Author: kekeh
  *  Homepage: http://kekeh.github.io/dpdatepicker
  *  License: MIT
- *  Date: 2015-07-16
+ *  Date: 2015-07-17
  */
-angular.module('template-dpdatepicker-0.0.3.html', ['templates/dpdatepicker.html']);
+angular.module('template-dpdatepicker-0.0.4.html', ['templates/dpdatepicker.html']);
 
 angular.module("templates/dpdatepicker.html", []).run(["$templateCache", function($templateCache) {
     $templateCache.put("templates/dpdatepicker.html",
@@ -72,7 +72,7 @@ angular.module("templates/dpdatepicker.html", []).run(["$templateCache", functio
         "");
 }]);
 
-angular.module('dpdatepicker', ["template-dpdatepicker-0.0.3.html"])
+angular.module('dpdatepicker', ["template-dpdatepicker-0.0.4.html"])
 
 /**
  * @ngdoc object
@@ -377,5 +377,6 @@ angular.module('dpdatepicker', ["template-dpdatepicker-0.0.3.html"])
             }
         };
     }]);
+
 
 
