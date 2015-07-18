@@ -34,7 +34,7 @@ angular.module('dpdatepicker', [])
  * @name dpdatepicker
  * @description dpdatepicker is main directive of the component and it implements the date picker.
  */
-    .directive('dpdatepicker', ['$timeout', '$document', 'dpdatepickerService', function ($timeout, $document, dpdatepickerService) {
+    .directive('dpdatepicker', ['$timeout', '$document', function ($timeout, $document) {
         return {
             restrict: 'EA',
             templateUrl: 'templates/dpdatepicker.html',
