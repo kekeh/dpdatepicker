@@ -47,7 +47,8 @@ angular.module('sampleapp', ['dpdatepicker']);
 | **dateFormat** | Date format. The day and the month are always two digits and the year is always four digits. For example: 'yyyy-mm-dd' | string | yes |
 | **monthLabels** | Object which contain month names. Shown in selector. | strings | yes |
 | **dayLabels** | Object which contain weekday names. Shown in selector. | strings | yes |
-| **sunRedColor** | Is sundays color red or not. | true or false | yes |
+| **currentDayHighlight** | Is current day highlighted. | true or false | yes |
+| **sundayHighlight** | Is sundays highlighted or not. | true or false | yes |
 | **closeOnSelect** | Is selector closed on date click or not. | true or false | yes |
 | **todayBtnText** | Today button text. | text | yes |
 | **footer** | Object which contain the sub properties. | See below | yes |
@@ -102,7 +103,8 @@ sampleapp.controller('sampleappctrl', function ($scope) {
             sa: 'Sat'
         },
         todayBtnText: 'Today',
-        sunRedColor: true,
+        sundayHighlight: true,
+        currentDayHighlight: true,
         closeOnSelect: false,
         footer: {
             visible: true,

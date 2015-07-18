@@ -53,12 +53,12 @@ angular.module("templates/dpdatepicker.html", []).run(["$templateCache", functio
     "                <tr ng-repeat=\"w in dates track by $index\">\n" +
     "                    <td ng-repeat=\"d in w track by $index\" \n" +
     "                        ng-class=\"{'dpcurrmonth':d.cmo===config.CURR_MONTH, \n" +
-    "                                   'dpcurrday':d.currDay,\n" +
+    "                                   'dpcurrday':d.currDay && options.currentDayHighlight,\n" +
     "                                   'dpselectedday':selectedDate.day===d.day && selectedDate.month===d.month && selectedDate.year===d.year && d.cmo===config.CURR_MONTH}\"\n" +
     "                        ng-click=\"cellClicked(d)\">\n" +
     "                        <span style=\"background-color:inherit\" \n" +
     "                              ng-class=\"{'dpprevmonth':d.cmo===config.PREV_MONTH,'dpcurrmonth':d.cmo===config.CURR_MONTH,'dpnextmonth':d.cmo===config.NEXT_MONTH,\n" +
-    "                                         'dpsunday':d.sun && d.cmo===config.CURR_MONTH && options.sunRedColor}\" ng-bind=\"d.day\"></span>\n" +
+    "                                         'dpsunday':d.sun && d.cmo===config.CURR_MONTH && options.sundayHighlight}\" ng-bind=\"d.day\"></span>\n" +
     "                    </td>\n" +
     "                </tr>\n" +
     "            </tbody>\n" +

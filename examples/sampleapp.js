@@ -44,7 +44,8 @@ sampleapp.controller('samplectrl1', function ($scope) {
             sa: 'Sat'
         },
         todayBtnText: 'Today',
-        sunRedColor: true,
+        sundayHighlight: true,
+        currentDayHighlight: true,
         closeOnSelect: true,
         footer: {
             visible: false
@@ -101,7 +102,8 @@ sampleapp.controller('samplectrl2', function ($scope) {
             sa: 'Sat'
         },
         todayBtnText: 'Today',
-        sunRedColor: true,
+        sundayHighlight: true,
+        currentDayHighlight: true,
         closeOnSelect: false,
         footer: {
             visible: true,

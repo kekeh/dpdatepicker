@@ -40,12 +40,12 @@
                 <tr ng-repeat="w in dates track by $index">
                     <td ng-repeat="d in w track by $index" 
                         ng-class="{'dpcurrmonth':d.cmo===config.CURR_MONTH, 
-                                   'dpcurrday':d.currDay,
+                                   'dpcurrday':d.currDay && options.currentDayHighlight,
                                    'dpselectedday':selectedDate.day===d.day && selectedDate.month===d.month && selectedDate.year===d.year && d.cmo===config.CURR_MONTH}"
                         ng-click="cellClicked(d)">
                         <span style="background-color:inherit" 
                               ng-class="{'dpprevmonth':d.cmo===config.PREV_MONTH,'dpcurrmonth':d.cmo===config.CURR_MONTH,'dpnextmonth':d.cmo===config.NEXT_MONTH,
-                                         'dpsunday':d.sun && d.cmo===config.CURR_MONTH && options.sunRedColor}" ng-bind="d.day"></span>
+                                         'dpsunday':d.sun && d.cmo===config.CURR_MONTH && options.sundayHighlight}" ng-bind="d.day"></span>
                     </td>
                 </tr>
             </tbody>
