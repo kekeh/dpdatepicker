@@ -1,83 +1,83 @@
 /* 
-*  Name: dpdatepicker 
-*  Description: Datepicker - AngularJS reusable UI component 
-*  Version: 0.0.5 
-*  Author: kekeh 
-*  Homepage: http://kekeh.github.io/dpdatepicker 
-*  License: MIT 
-*  Date: 2015-07-18 
-*/ 
+ *  Name: dpdatepicker
+ *  Description: Datepicker - AngularJS reusable UI component
+ *  Version: 0.0.5
+ *  Author: kekeh
+ *  Homepage: http://kekeh.github.io/dpdatepicker
+ *  License: MIT
+ *  Date: 2015-07-18
+ */
 angular.module('template-dpdatepicker-0.0.5.html', ['templates/dpdatepicker.html']);
 
 angular.module("templates/dpdatepicker.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("templates/dpdatepicker.html",
-    "<div class=\"dpdatepicker\">\n" +
-    "    <div class=\"dpselectiongroup\" ng-click=\"picker($event)\">\n" +
-    "        <span class=\"dpselection\" ng-style=\"{'line-height': elemHeight + 'px'}\" ng-click=\"picker($event)\" tooltip-window>{{selectionDayTxt}}</span>\n" +
-    "        <span class=\"dpselbtngroup\" ng-style=\"{'height': elemHeight + 'px'}\">\n" +
-    "            <button class=\"dpbtnclear\" ng-show=\"selectionDayTxt.length > 0\" ng-click=\"clearSelection($event)\" ng-mouseenter=\"$event.stopPropagation()\">\n" +
-    "                <span class=\"icon icon-cross\"></span>\n" +
-    "            </button>\n" +
-    "            <button class=\"dpbtnpicker\" ng-click=\"picker($event)\" ng-mouseenter=\"$event.stopPropagation()\">\n" +
-    "                <span class=\"icon icon-calendar\"></span>\n" +
-    "            </button>\n" +
-    "        </span>\n" +
-    "    </div>\n" +
-    "\n" +
-    "    <div class=\"dpselector\" ng-if=\"showSelector\">\n" +
-    "        <table class=\"dpheader\">                  \n" +
-    "            <tr> \n" +
-    "                <td>\n" +
-    "                    <div style=\"float:left\">\n" +
-    "                        <div class=\"dpheaderbtn\" ng-click=\"prevMonth()\"><span class=\"icon icon-left\"></span></div>\n" +
-    "                        <div class=\"dpheadermonthtxt\" ng-bind=\"visibleMonth.monthTxt\"></div>\n" +
-    "                        <div class=\"dpheaderbtn\" ng-click=\"nextMonth()\"><span class=\"icon icon-right\"></span></div>\n" +
-    "                    </div>\n" +
-    "                </td>\n" +
-    "                <td>\n" +
-    "                    <button class=\"dpheadertodaybtn\" ng-click=\"today()\">{{options.todayBtnText}}</button>\n" +
-    "                </td>\n" +
-    "                <td>\n" +
-    "                    <div style=\"float:right\">\n" +
-    "                        <div class=\"dpheaderbtn\" ng-click=\"prevYear()\"><span class=\"icon icon-left\"></span></div>\n" +
-    "                        <div class=\"dpheaderyeartxt\" ng-bind=\"visibleMonth.year\"></div>\n" +
-    "                        <div class=\"dpheaderbtn\" ng-click=\"nextYear()\"><span class=\"icon icon-right\"></span></div>\n" +
-    "                    </div>\n" +
-    "                </td>\n" +
-    "            </tr>\n" +
-    "        </table>     \n" +
-    "\n" +
-    "        <table class=\"dptable\">                  \n" +
-    "            <thead><tr><th ng-repeat=\"d in weekDays track by $index\" ng-bind=\"d\"></th></tr></thead>\n" +
-    "            <tbody>\n" +
-    "                <tr ng-repeat=\"w in dates track by $index\">\n" +
-    "                    <td ng-repeat=\"d in w track by $index\" \n" +
-    "                        ng-class=\"{'dpcurrmonth':d.cmo===config.CURR_MONTH, \n" +
-    "                                   'dpcurrday':d.currDay,\n" +
-    "                                   'dpselectedday':selectedDate.day===d.day && selectedDate.month===d.month && selectedDate.year===d.year && d.cmo===config.CURR_MONTH}\"\n" +
-    "                        ng-click=\"cellClicked(d)\">\n" +
-    "                        <span style=\"background-color:inherit\" \n" +
-    "                              ng-class=\"{'dpprevmonth':d.cmo===config.PREV_MONTH,'dpcurrmonth':d.cmo===config.CURR_MONTH,'dpnextmonth':d.cmo===config.NEXT_MONTH,\n" +
-    "                                         'dpsunday':d.sun && d.cmo===config.CURR_MONTH && options.sunRedColor}\" ng-bind=\"d.day\"></span>\n" +
-    "                    </td>\n" +
-    "                </tr>\n" +
-    "            </tbody>\n" +
-    "        </table>\n" +
-    "\n" +
-    "        <div class=\"dpfooterarea\" ng-if=\"options.footer !== undefined && options.footer.visible\">\n" +
-    "            <button class=\"dpfooterbtn\" ng-class=\"{'dpbtndisable': selectedDate.day===0}\" ng-disabled=\"selectedDate.day===0\" ng-click=\"accept()\">{{options.footer.okBtnText}}</button>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "\n" +
-    "\n" +
-    "    <script type=\"text/ng-template\" id=\"datepickertooltip.html\">\n" +
-    "        <div class=\"vstooltip\" ng-click=\"closeTooltip($event)\">\n" +
-    "            <span class=\"vstooltiptext\">{{selectionDayTxt}}</span>\n" +
-    "        </div>\n" +
-    "    </script>\n" +
-    "\n" +
-    "</div> \n" +
-    "");
+    $templateCache.put("templates/dpdatepicker.html",
+        "<div class=\"dpdatepicker\">\n" +
+        "    <div class=\"dpselectiongroup\" ng-click=\"picker($event)\">\n" +
+        "        <span class=\"dpselection\" ng-style=\"{'line-height': elemHeight + 'px'}\" ng-click=\"picker($event)\" tooltip-window>{{selectionDayTxt}}</span>\n" +
+        "        <span class=\"dpselbtngroup\" ng-style=\"{'height': elemHeight + 'px'}\">\n" +
+        "            <button class=\"dpbtnclear\" ng-show=\"selectionDayTxt.length > 0\" ng-click=\"clearSelection($event)\" ng-mouseenter=\"$event.stopPropagation()\">\n" +
+        "                <span class=\"icon icon-cross\"></span>\n" +
+        "            </button>\n" +
+        "            <button class=\"dpbtnpicker\" ng-click=\"picker($event)\" ng-mouseenter=\"$event.stopPropagation()\">\n" +
+        "                <span class=\"icon icon-calendar\"></span>\n" +
+        "            </button>\n" +
+        "        </span>\n" +
+        "    </div>\n" +
+        "\n" +
+        "    <div class=\"dpselector\" ng-if=\"showSelector\">\n" +
+        "        <table class=\"dpheader\">                  \n" +
+        "            <tr> \n" +
+        "                <td>\n" +
+        "                    <div style=\"float:left\">\n" +
+        "                        <div class=\"dpheaderbtn\" ng-click=\"prevMonth()\"><span class=\"icon icon-left\"></span></div>\n" +
+        "                        <div class=\"dpheadermonthtxt\" ng-bind=\"visibleMonth.monthTxt\"></div>\n" +
+        "                        <div class=\"dpheaderbtn\" ng-click=\"nextMonth()\"><span class=\"icon icon-right\"></span></div>\n" +
+        "                    </div>\n" +
+        "                </td>\n" +
+        "                <td>\n" +
+        "                    <button class=\"dpheadertodaybtn\" ng-click=\"today()\">{{options.todayBtnText}}</button>\n" +
+        "                </td>\n" +
+        "                <td>\n" +
+        "                    <div style=\"float:right\">\n" +
+        "                        <div class=\"dpheaderbtn\" ng-click=\"prevYear()\"><span class=\"icon icon-left\"></span></div>\n" +
+        "                        <div class=\"dpheaderyeartxt\" ng-bind=\"visibleMonth.year\"></div>\n" +
+        "                        <div class=\"dpheaderbtn\" ng-click=\"nextYear()\"><span class=\"icon icon-right\"></span></div>\n" +
+        "                    </div>\n" +
+        "                </td>\n" +
+        "            </tr>\n" +
+        "        </table>     \n" +
+        "\n" +
+        "        <table class=\"dptable\">                  \n" +
+        "            <thead><tr><th ng-repeat=\"d in weekDays track by $index\" ng-bind=\"d\"></th></tr></thead>\n" +
+        "            <tbody>\n" +
+        "                <tr ng-repeat=\"w in dates track by $index\">\n" +
+        "                    <td ng-repeat=\"d in w track by $index\" \n" +
+        "                        ng-class=\"{'dpcurrmonth':d.cmo===config.CURR_MONTH, \n" +
+        "                                   'dpcurrday':d.currDay && options.currentDayHighlight,\n" +
+        "                                   'dpselectedday':selectedDate.day===d.day && selectedDate.month===d.month && selectedDate.year===d.year && d.cmo===config.CURR_MONTH}\"\n" +
+        "                        ng-click=\"cellClicked(d)\">\n" +
+        "                        <span style=\"background-color:inherit\" \n" +
+        "                              ng-class=\"{'dpprevmonth':d.cmo===config.PREV_MONTH,'dpcurrmonth':d.cmo===config.CURR_MONTH,'dpnextmonth':d.cmo===config.NEXT_MONTH,\n" +
+        "                                         'dpsunday':d.sun && d.cmo===config.CURR_MONTH && options.sundayHighlight}\" ng-bind=\"d.day\"></span>\n" +
+        "                    </td>\n" +
+        "                </tr>\n" +
+        "            </tbody>\n" +
+        "        </table>\n" +
+        "\n" +
+        "        <div class=\"dpfooterarea\" ng-if=\"options.footer !== undefined && options.footer.visible\">\n" +
+        "            <button class=\"dpfooterbtn\" ng-class=\"{'dpbtndisable': selectedDate.day===0}\" ng-disabled=\"selectedDate.day===0\" ng-click=\"accept()\">{{options.footer.okBtnText}}</button>\n" +
+        "        </div>\n" +
+        "    </div>\n" +
+        "\n" +
+        "\n" +
+        "    <script type=\"text/ng-template\" id=\"datepickertooltip.html\">\n" +
+        "        <div class=\"vstooltip\" ng-click=\"closeTooltip($event)\">\n" +
+        "            <span class=\"vstooltiptext\">{{selectionDayTxt}}</span>\n" +
+        "        </div>\n" +
+        "    </script>\n" +
+        "\n" +
+        "</div> \n" +
+        "");
 }]);
 
 angular.module('dpdatepicker', ["template-dpdatepicker-0.0.5.html"])
@@ -116,7 +116,7 @@ angular.module('dpdatepicker', ["template-dpdatepicker-0.0.5.html"])
  * @name dpdatepicker
  * @description dpdatepicker is main directive of the component and it implements the date picker.
  */
-    .directive('dpdatepicker', ['$timeout', '$document', 'dpdatepickerService', function ($timeout, $document, dpdatepickerService) {
+    .directive('dpdatepicker', ['$timeout', '$document', function ($timeout, $document) {
         return {
             restrict: 'EA',
             templateUrl: 'templates/dpdatepicker.html',
