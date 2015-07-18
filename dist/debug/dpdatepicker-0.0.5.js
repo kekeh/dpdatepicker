@@ -1,24 +1,24 @@
 /* 
 *  Name: dpdatepicker 
 *  Description: Datepicker - AngularJS reusable UI component 
-*  Version: 0.0.4 
+*  Version: 0.0.5 
 *  Author: kekeh 
 *  Homepage: http://kekeh.github.io/dpdatepicker 
 *  License: MIT 
-*  Date: 2015-07-17 
+*  Date: 2015-07-18 
 */ 
-angular.module('template-dpdatepicker-0.0.4.html', ['templates/dpdatepicker.html']);
+angular.module('template-dpdatepicker-0.0.5.html', ['templates/dpdatepicker.html']);
 
 angular.module("templates/dpdatepicker.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/dpdatepicker.html",
     "<div class=\"dpdatepicker\">\n" +
     "    <div class=\"dpselectiongroup\" ng-click=\"picker($event)\">\n" +
-    "        <span class=\"dpselection\" ng-style=\"{'line-height': elemHeight + 'px'}\" ng-click=\"picker($event)\">{{selectionDayTxt}}</span>\n" +
+    "        <span class=\"dpselection\" ng-style=\"{'line-height': elemHeight + 'px'}\" ng-click=\"picker($event)\" tooltip-window>{{selectionDayTxt}}</span>\n" +
     "        <span class=\"dpselbtngroup\" ng-style=\"{'height': elemHeight + 'px'}\">\n" +
-    "            <button class=\"dpbtnclear\" ng-show=\"selectionDayTxt.length > 0\" ng-click=\"clearSelection($event)\">\n" +
+    "            <button class=\"dpbtnclear\" ng-show=\"selectionDayTxt.length > 0\" ng-click=\"clearSelection($event)\" ng-mouseenter=\"$event.stopPropagation()\">\n" +
     "                <span class=\"icon icon-cross\"></span>\n" +
     "            </button>\n" +
-    "            <button class=\"dpbtnpicker\" ng-click=\"picker($event)\">\n" +
+    "            <button class=\"dpbtnpicker\" ng-click=\"picker($event)\" ng-mouseenter=\"$event.stopPropagation()\">\n" +
     "                <span class=\"icon icon-calendar\"></span>\n" +
     "            </button>\n" +
     "        </span>\n" +
@@ -68,11 +68,19 @@ angular.module("templates/dpdatepicker.html", []).run(["$templateCache", functio
     "            <button class=\"dpfooterbtn\" ng-class=\"{'dpbtndisable': selectedDate.day===0}\" ng-disabled=\"selectedDate.day===0\" ng-click=\"accept()\">{{options.footer.okBtnText}}</button>\n" +
     "        </div>\n" +
     "    </div>\n" +
+    "\n" +
+    "\n" +
+    "    <script type=\"text/ng-template\" id=\"datepickertooltip.html\">\n" +
+    "        <div class=\"vstooltip\" ng-click=\"closeTooltip($event)\">\n" +
+    "            <span class=\"vstooltiptext\">{{selectionDayTxt}}</span>\n" +
+    "        </div>\n" +
+    "    </script>\n" +
+    "\n" +
     "</div> \n" +
     "");
 }]);
 
-angular.module('dpdatepicker', ["template-dpdatepicker-0.0.4.html"])
+angular.module('dpdatepicker', ["template-dpdatepicker-0.0.5.html"])
 
 /**
  * @ngdoc object
@@ -85,15 +93,30 @@ angular.module('dpdatepicker', ["template-dpdatepicker-0.0.4.html"])
         DATE_CONST: 'dd',
         PREV_MONTH: 1,
         CURR_MONTH: 2,
-        NEXT_MONTH: 3
+        NEXT_MONTH: 3,
+        TOOLTIP_SHOW_DELAY: 600
     })
+
+/**
+ * @ngdoc object
+ * @name dpdatepickerService
+ * @description dpdatepickerService contain common code of the dpdatepicker.
+ */
+    .service('dpdatepickerService', ['$http', '$templateCache', function ($http, $templateCache) {
+        this.getTemplate = function (name) {
+            var promise = $http.get(name, {cache: $templateCache}).success(function (response) {
+                return response.data;
+            });
+            return promise;
+        };
+    }])
 
 /**
  * @ngdoc object
  * @name dpdatepicker
  * @description dpdatepicker is main directive of the component and it implements the date picker.
  */
-    .directive('dpdatepicker', ['$timeout', '$document', function ($timeout, $document) {
+    .directive('dpdatepicker', ['$timeout', '$document', 'dpdatepickerService', function ($timeout, $document, dpdatepickerService) {
         return {
             restrict: 'EA',
             templateUrl: 'templates/dpdatepicker.html',
@@ -210,14 +233,13 @@ angular.module('dpdatepicker', ["template-dpdatepicker-0.0.4.html"])
                     event.stopPropagation();
                     scope.selectionDayTxt = '';
                     scope.selectedDate = {day: 0, month: 0, year: 0};
+                    notifyParent();
                 };
 
                 scope.accept = function () {
                     // OK button clicked
                     formatDate(scope.selectedDate);
-                    if (scope.options.dateSelectCb) {
-                        scope.options.dateSelectCb(scope.selectedDate.year, scope.selectedDate.month, scope.selectedDate.day, scope.selectionDayTxt);
-                    }
+                    notifyParent();
                     scope.showSelector = false;
                 };
 
@@ -228,6 +250,11 @@ angular.module('dpdatepicker', ["template-dpdatepicker-0.0.4.html"])
                     }
                 }, true);
 
+                function notifyParent() {
+                    if (scope.options.dateSelectCb) {
+                        scope.options.dateSelectCb(scope.selectedDate.year, scope.selectedDate.month, scope.selectedDate.day, scope.selectionDayTxt);
+                    }
+                }
 
                 function formatDate(val) {
                     var fmt = angular.copy(scope.options.dateFormat);
@@ -374,6 +401,65 @@ angular.module('dpdatepicker', ["template-dpdatepicker-0.0.4.html"])
                 }
 
                 $timeout(init);
+            }
+        };
+    }])
+
+/**
+ * @ngdoc object
+ * @name tooltipWindow
+ * @description tooltipWindow directive implements the tooltip window.
+ */
+    .directive('tooltipWindow', ['$compile', '$timeout', 'dpdatepickerService', function ($compile, $timeout, dpdatepickerService) {
+        return {
+            restrict: 'A',
+            scope: false,
+            link: function (scope, element, attrs) {
+                var pElem = null;
+                var tooltip = null;
+                var timer = null;
+
+                scope.closeTooltip = function (event) {
+                    event.stopPropagation();
+                    onMouseLeave();
+                };
+
+                function onMouseEnter() {
+                    if (element[0].scrollWidth > element[0].offsetWidth) {
+                        timer = $timeout(function () {
+                            dpdatepickerService.getTemplate('datepickertooltip.html').then(function (tpl) {
+                                tooltip = angular.element(tpl.data);
+                                pElem.prepend($compile(tooltip)(scope));
+                            });
+                        }, scope.config.TOOLTIP_SHOW_DELAY);
+                    }
+                }
+
+                function onMouseLeave() {
+                    cancelTimer();
+                    if (tooltip !== null) {
+                        tooltip.remove();
+                        tooltip = null;
+                    }
+                }
+
+                function cancelTimer() {
+                    $timeout.cancel(timer);
+                    timer = null;
+                }
+
+                scope.$on('$destroy', function () {
+                    pElem.off('mouseenter', onMouseEnter);
+                    pElem.off('mouseleave', onMouseLeave);
+                });
+
+                function init() {
+                    pElem = element.parent();
+                    pElem.on('mouseenter', onMouseEnter);
+                    pElem.on('mouseleave', onMouseLeave);
+                }
+
+                init();
             }
         };
     }]);

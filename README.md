@@ -1,4 +1,4 @@
-# dpdatepicker v. 0.0.4
+# dpdatepicker v. 0.0.5
 
 **Datepicker - AngularJS reusable UI component**
 
@@ -7,10 +7,10 @@ Simple AngularJS directive which implements the date picker. Depends on only the
 
 ## Usage
 
-* include the **dpdatepicker-0.0.4.min.js** and the **dpdatepicker-0.0.4.min.css** files into your project. See the **Build project** and the **Installation** chapters below.
+* include the **dpdatepicker-0.0.5.min.js** and the **dpdatepicker-0.0.5.min.css** files into your project. See the **Build project** and the **Installation** chapters below.
 ```html
-<script src="dpdatepicker-0.0.4.min.js"></script>
-<link href="dpdatepicker-0.0.4.min.css" rel="stylesheet" type="text/css">
+<script src="dpdatepicker-0.0.5.min.js"></script>
+<link href="dpdatepicker-0.0.5.min.css" rel="stylesheet" type="text/css">
 ```
 * inject the **dpdatepicker** module into your application module.
 ```js
@@ -53,7 +53,7 @@ angular.module('sampleapp', ['dpdatepicker']);
 | **footer** | Object which contain the sub properties. | See below | yes |
 | footer.**visible** | Is footer visible or not. | true or false | yes 
 | footer.**okBtnText** | OK button text. | text | yes if previous is **true**
-| **dateSelectCb** | Date select callback function. See below. | function | no |
+| **dateSelectCb** | Date select or clear selection callback function. See below. | function | no |
 
 
 ### Javascript example
@@ -61,7 +61,7 @@ angular.module('sampleapp', ['dpdatepicker']);
 var sampleapp = angular.module('sampleapp', ['dpdatepicker']);
 sampleapp.controller('sampleappctrl', function ($scope) {
 
-    // Watch the user selections - invoked when the user select the date
+    // Watch the user selections - invoked when the user select the date or clear the selection
     function onDateSelect(year, month, day, formatted) {
         console.log('onDateSelect(): year: ', year, ' - month: ', month, ' - day: ', day, ' - formatted: ', formatted);
     }
@@ -151,13 +151,13 @@ Example of the function. See description of the parameters below the example.
 
 | Function | Parameters | Description | 
 | :------------ |:---------------|:---------------|
-| onDateSelect | year, month, day and formatted date | Called when the user selects the date from the UI. |
+| onDateSelect | year, month, day and formatted date | Called when the user selects the date from the UI or clear the selection. |
 
 ##### Parameters
-* year - year of the selected date
-* month - month of the selected date
-* day - day of the selected date
-* formatted - formatted date. See the **Options data** chapter above
+* year - year of the selected date or zero in case of clear selection
+* month - month of the selected date or zero in case of clear selection
+* day - day of the selected date or zero in case of clear selection
+* formatted - formatted date or empty string in case of clear selection. See the **Options data** chapter above
 
 
 ## Demo

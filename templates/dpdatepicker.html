@@ -1,11 +1,11 @@
 <div class="dpdatepicker">
     <div class="dpselectiongroup" ng-click="picker($event)">
-        <span class="dpselection" ng-style="{'line-height': elemHeight + 'px'}" ng-click="picker($event)">{{selectionDayTxt}}</span>
+        <span class="dpselection" ng-style="{'line-height': elemHeight + 'px'}" ng-click="picker($event)" tooltip-window>{{selectionDayTxt}}</span>
         <span class="dpselbtngroup" ng-style="{'height': elemHeight + 'px'}">
-            <button class="dpbtnclear" ng-show="selectionDayTxt.length > 0" ng-click="clearSelection($event)">
+            <button class="dpbtnclear" ng-show="selectionDayTxt.length > 0" ng-click="clearSelection($event)" ng-mouseenter="$event.stopPropagation()">
                 <span class="icon icon-cross"></span>
             </button>
-            <button class="dpbtnpicker" ng-click="picker($event)">
+            <button class="dpbtnpicker" ng-click="picker($event)" ng-mouseenter="$event.stopPropagation()">
                 <span class="icon icon-calendar"></span>
             </button>
         </span>
@@ -55,4 +55,12 @@
             <button class="dpfooterbtn" ng-class="{'dpbtndisable': selectedDate.day===0}" ng-disabled="selectedDate.day===0" ng-click="accept()">{{options.footer.okBtnText}}</button>
         </div>
     </div>
+
+
+    <script type="text/ng-template" id="datepickertooltip.html">
+        <div class="vstooltip" ng-click="closeTooltip($event)">
+            <span class="vstooltiptext">{{selectionDayTxt}}</span>
+        </div>
+    </script>
+
 </div> 

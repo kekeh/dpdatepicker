@@ -2,7 +2,7 @@
   "author": "kekeh",
   "description": "Datepicker - AngularJS reusable UI component",
   "name": "dpdatepicker",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "license": "MIT",
   "homepage": "http://kekeh.github.io/dpdatepicker",
   "dependencies": {
