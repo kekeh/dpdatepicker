@@ -47,8 +47,8 @@ describe('dpdatepicker', function () {
                 fr: 'Fri',
                 sa: 'Sat'
             },
-            sundayHighlight: true,
-            currentDayHighlight: true,
+            sunHighlight: true,
+            currDayHighlight: true,
             closeOnSelect: false,
             todayBtnText: 'Today',
             footer: {

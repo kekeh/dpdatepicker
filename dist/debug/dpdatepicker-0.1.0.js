@@ -1,32 +1,27 @@
 /* 
 *  Name: dpdatepicker 
 *  Description: Datepicker - AngularJS reusable UI component 
-*  Version: 0.0.5 
+*  Version: 0.1.0 
 *  Author: kekeh 
 *  Homepage: http://kekeh.github.io/dpdatepicker 
 *  License: MIT 
-*  Date: 2015-07-18 
+*  Date: 2015-07-30 
 */ 
-angular.module('template-dpdatepicker-0.0.5.html', ['templates/dpdatepicker.html']);
+angular.module('template-dpdatepicker-0.1.0.html', ['templates/dpdatepicker.html']);
 
 angular.module("templates/dpdatepicker.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/dpdatepicker.html",
-    "<div class=\"dpdatepicker\">\n" +
+    "<div class=\"dpdatepicker\" ng-style=\"{'width':width, 'height': height}\">\n" +
     "    <div class=\"dpselectiongroup\" ng-click=\"picker($event)\">\n" +
-    "        <span class=\"dpselection\" ng-style=\"{'line-height': elemHeight + 'px'}\" ng-click=\"picker($event)\" tooltip-window>{{selectionDayTxt}}</span>\n" +
-    "        <span class=\"dpselbtngroup\" ng-style=\"{'height': elemHeight + 'px'}\">\n" +
-    "            <button class=\"dpbtnclear\" ng-show=\"selectionDayTxt.length > 0\" ng-click=\"clearSelection($event)\" ng-mouseenter=\"$event.stopPropagation()\">\n" +
-    "                <span class=\"icon icon-cross\"></span>\n" +
-    "            </button>\n" +
-    "            <button class=\"dpbtnpicker\" ng-click=\"picker($event)\" ng-mouseenter=\"$event.stopPropagation()\">\n" +
-    "                <span class=\"icon icon-calendar\"></span>\n" +
-    "            </button>\n" +
+    "        <span class=\"dpselection\" ng-style=\"{'line-height': height}\" ng-click=\"picker($event)\" tooltip-window>{{selectionDayTxt}}</span>\n" +
+    "        <span class=\"dpselbtngroup\" ng-style=\"{'height': height}\">\n" +
+    "            <button class=\"dpbtnclear\" ng-show=\"selectionDayTxt.length > 0\" ng-click=\"clearSelection($event)\" ng-mouseenter=\"$event.stopPropagation()\"><span class=\"icon icon-cross\"></span></button>\n" +
+    "            <button class=\"dpbtnpicker\" ng-click=\"picker($event)\" ng-mouseenter=\"$event.stopPropagation()\"><span class=\"icon icon-calendar\"></span></button>\n" +
     "        </span>\n" +
     "    </div>\n" +
-    "\n" +
     "    <div class=\"dpselector\" ng-if=\"showSelector\">\n" +
-    "        <table class=\"dpheader\">                  \n" +
-    "            <tr> \n" +
+    "        <table class=\"dpheader\">\n" +
+    "            <tr>\n" +
     "                <td>\n" +
     "                    <div style=\"float:left\">\n" +
     "                        <div class=\"dpheaderbtn\" ng-click=\"prevMonth()\"><span class=\"icon icon-left\"></span></div>\n" +
@@ -35,7 +30,7 @@ angular.module("templates/dpdatepicker.html", []).run(["$templateCache", functio
     "                    </div>\n" +
     "                </td>\n" +
     "                <td>\n" +
-    "                    <button class=\"dpheadertodaybtn\" ng-click=\"today()\">{{options.todayBtnText}}</button>\n" +
+    "                    <button class=\"dpheadertodaybtn\" ng-click=\"today()\">{{options.todayBtnText!==undefined?options.todayBtnText:cf.todayBtnText}}</button>\n" +
     "                </td>\n" +
     "                <td>\n" +
     "                    <div style=\"float:right\">\n" +
@@ -45,56 +40,66 @@ angular.module("templates/dpdatepicker.html", []).run(["$templateCache", functio
     "                    </div>\n" +
     "                </td>\n" +
     "            </tr>\n" +
-    "        </table>     \n" +
-    "\n" +
-    "        <table class=\"dptable\">                  \n" +
+    "        </table>\n" +
+    "        <table class=\"dptable\">\n" +
     "            <thead><tr><th ng-repeat=\"d in weekDays track by $index\" ng-bind=\"d\"></th></tr></thead>\n" +
     "            <tbody>\n" +
     "                <tr ng-repeat=\"w in dates track by $index\">\n" +
-    "                    <td ng-repeat=\"d in w track by $index\" \n" +
-    "                        ng-class=\"{'dpcurrmonth':d.cmo===config.CURR_MONTH, \n" +
-    "                                   'dpcurrday':d.currDay && options.currentDayHighlight,\n" +
-    "                                   'dpselectedday':selectedDate.day===d.day && selectedDate.month===d.month && selectedDate.year===d.year && d.cmo===config.CURR_MONTH}\"\n" +
-    "                        ng-click=\"cellClicked(d)\">\n" +
-    "                        <span style=\"background-color:inherit\" \n" +
-    "                              ng-class=\"{'dpprevmonth':d.cmo===config.PREV_MONTH,'dpcurrmonth':d.cmo===config.CURR_MONTH,'dpnextmonth':d.cmo===config.NEXT_MONTH,\n" +
-    "                                         'dpsunday':d.sun && d.cmo===config.CURR_MONTH && options.sundayHighlight}\" ng-bind=\"d.day\"></span>\n" +
+    "                    <td ng-repeat=\"d in w track by $index\" ng-class=\"{'dpcurrmonth':d.cmo===cf.CURR_MONTH, 'dpcurrday':d.currDay && (options.currDayHighlight!==undefined?options.currDayHighlight:cf.currDayHighlight),'dpselectedday':selectedDate.day===d.day && selectedDate.month===d.month && selectedDate.year===d.year && d.cmo===cf.CURR_MONTH}\" ng-click=\"cellClicked(d)\">\n" +
+    "                        <span style=\"background-color:inherit\" ng-class=\"{'dpprevmonth':d.cmo===cf.PREV_MONTH,'dpcurrmonth':d.cmo===cf.CURR_MONTH,'dpnextmonth':d.cmo===cf.NEXT_MONTH,'dpsunday':d.sun && d.cmo===cf.CURR_MONTH && (options.sunHighlight!==undefined?options.sunHighlight:cf.sunHighlight)}\" ng-bind=\"d.day\"></span>\n" +
     "                    </td>\n" +
     "                </tr>\n" +
     "            </tbody>\n" +
     "        </table>\n" +
-    "\n" +
-    "        <div class=\"dpfooterarea\" ng-if=\"options.footer !== undefined && options.footer.visible\">\n" +
-    "            <button class=\"dpfooterbtn\" ng-class=\"{'dpbtndisable': selectedDate.day===0}\" ng-disabled=\"selectedDate.day===0\" ng-click=\"accept()\">{{options.footer.okBtnText}}</button>\n" +
+    "        <div class=\"dpfooterarea\" ng-if=\"options.footer!==undefined && options.footer.visible!==undefined?options.footer.visible:cf.footer.visible\">\n" +
+    "            <button class=\"dpfooterbtn\" ng-class=\"{'dpbtndisable': selectedDate.day===0}\" ng-disabled=\"selectedDate.day===0\" ng-click=\"accept()\">{{options.footer.okBtnText!==undefined?options.footer.okBtnText:cf.footer.okBtnText}}</button>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
-    "\n" +
     "    <script type=\"text/ng-template\" id=\"datepickertooltip.html\">\n" +
-    "        <div class=\"vstooltip\" ng-click=\"closeTooltip($event)\">\n" +
-    "            <span class=\"vstooltiptext\">{{selectionDayTxt}}</span>\n" +
-    "        </div>\n" +
+    "        <div class=\"vstooltip\" ng-click=\"closeTooltip($event)\"><span class=\"vstooltiptext\">{{selectionDayTxt}}</span></div>\n" +
     "    </script>\n" +
-    "\n" +
-    "</div> \n" +
-    "");
+    "</div>");
 }]);
 
-angular.module('dpdatepicker', ["template-dpdatepicker-0.0.5.html"])
+angular.module('dpdatepicker', ["template-dpdatepicker-0.1.0.html"])
 
 /**
  * @ngdoc object
  * @name dpdatepickerConfig
- * @description dpdatepickerConfig constants of the date picker.
+ * @description dpdatepickerConfig constants and default values of the configuration of the date picker.
  */
     .constant('dpdatepickerConfig', {
+        dateFormat: 'dd.mm.yyyy',
+        monthLabels: {
+            1: 'Jan',
+            2: 'Feb',
+            3: 'Mar',
+            4: 'Apr',
+            5: 'May',
+            6: 'Jun',
+            7: 'Jul',
+            8: 'Aug',
+            9: 'Sep',
+            10: 'Oct',
+            11: 'Nov',
+            12: 'Dec'
+        },
+        dayLabels: {su: 'Sun', mo: 'Mon', tu: 'Tue', we: 'Wed', th: 'Thu', fr: 'Fri', sa: 'Sat'},
+        todayBtnText: 'Today',
+        sunHighlight: true,
+        currDayHighlight: true,
+        closeOnSelect: false,
+        footer: {visible: true, okBtnText: 'OK'},
         YEAR_CONST: 'yyyy',
         MONTH_CONST: 'mm',
         DATE_CONST: 'dd',
         PREV_MONTH: 1,
         CURR_MONTH: 2,
         NEXT_MONTH: 3,
-        TOOLTIP_SHOW_DELAY: 600
+        TOOLTIP_SHOW_DELAY: 600,
+        HEIGHT: '30px',
+        WIDTH: '180px'
     })
 
 /**
@@ -104,10 +109,10 @@ angular.module('dpdatepicker', ["template-dpdatepicker-0.0.5.html"])
  */
     .service('dpdatepickerService', ['$http', '$templateCache', function ($http, $templateCache) {
         this.getTemplate = function (name) {
-            var promise = $http.get(name, {cache: $templateCache}).success(function (response) {
+            var p = $http.get(name, {cache: $templateCache}).success(function (response) {
                 return response.data;
             });
-            return promise;
+            return p;
         };
     }])
 
@@ -121,18 +126,19 @@ angular.module('dpdatepicker', ["template-dpdatepicker-0.0.5.html"])
             restrict: 'EA',
             templateUrl: 'templates/dpdatepicker.html',
             scope: {
+                ngModel: '=?',
                 options: '='
             },
             controller: ['$scope', 'dpdatepickerConfig', function ($scope, dpdatepickerConfig) {
-                $scope.config = dpdatepickerConfig;
+                $scope.cf = dpdatepickerConfig;
             }],
             link: function (scope, element, attrs) {
-                scope.weekDays = [];
+                scope.weekDays = [], scope.dates = [];
                 scope.selectionDayTxt = '';
                 scope.selectedDate = {day: 0, month: 0, year: 0};
                 scope.visibleMonth = {monthTxt: '', monthNbr: 0, year: 0};
-                scope.dates = [];
                 scope.showSelector = false;
+                scope.width = scope.cf.WIDTH, scope.height = scope.cf.HEIGHT;
 
                 var today = new Date();
 
@@ -182,22 +188,21 @@ angular.module('dpdatepicker', ["template-dpdatepicker-0.0.5.html"])
 
                 scope.cellClicked = function (cell) {
                     // Cell clicked in the selector
-                    if (cell.cmo === scope.config.PREV_MONTH) {
+                    if (cell.cmo === scope.cf.PREV_MONTH) {
                         // Previous month of day
                         scope.prevMonth();
                     }
-                    else if (cell.cmo === scope.config.CURR_MONTH) {
+                    else if (cell.cmo === scope.cf.CURR_MONTH) {
                         // Current month of day
                         scope.selectedDate = {day: cell.day, month: cell.month, year: cell.year};
-                        if (scope.options.closeOnSelect) {
+                        var closeOnSel = !angular.isUndefined(scope.options.closeOnSelect) ? scope.options.closeOnSelect : scope.cf.closeOnSelect;
+                        if (closeOnSel) {
                             formatDate(cell);
+                            notifyParent(cell);
                             scope.showSelector = false;
                         }
-                        if (scope.options.closeOnSelect && scope.options.dateSelectCb) {
-                            scope.options.dateSelectCb(cell.year, cell.month, cell.day, scope.selectionDayTxt);
-                        }
                     }
-                    else if (cell.cmo === scope.config.NEXT_MONTH) {
+                    else if (cell.cmo === scope.cf.NEXT_MONTH) {
                         // Next month of day
                         scope.nextMonth();
                     }
@@ -221,7 +226,7 @@ angular.module('dpdatepicker', ["template-dpdatepicker-0.0.5.html"])
                         }
 
                         // Set current month
-                        scope.visibleMonth = {monthTxt: scope.options.monthLabels[m], monthNbr: m, year: y};
+                        scope.visibleMonth = {monthTxt: getMonthLabels()[m], monthNbr: m, year: y};
 
                         // Create current month
                         createMonth(m, y);
@@ -233,13 +238,13 @@ angular.module('dpdatepicker', ["template-dpdatepicker-0.0.5.html"])
                     event.stopPropagation();
                     scope.selectionDayTxt = '';
                     scope.selectedDate = {day: 0, month: 0, year: 0};
-                    notifyParent();
+                    notifyParent(scope.selectedDate);
                 };
 
                 scope.accept = function () {
                     // OK button clicked
                     formatDate(scope.selectedDate);
-                    notifyParent();
+                    notifyParent(scope.selectedDate);
                     scope.showSelector = false;
                 };
 
@@ -250,17 +255,18 @@ angular.module('dpdatepicker', ["template-dpdatepicker-0.0.5.html"])
                     }
                 }, true);
 
-                function notifyParent() {
+                function notifyParent(date) {
                     if (scope.options.dateSelectCb) {
-                        scope.options.dateSelectCb(scope.selectedDate.year, scope.selectedDate.month, scope.selectedDate.day, scope.selectionDayTxt);
+                        scope.options.dateSelectCb(date.year, date.month, date.day, scope.selectionDayTxt);
                     }
+                    scope.ngModel = scope.selectionDayTxt;
                 }
 
                 function formatDate(val) {
-                    var fmt = angular.copy(scope.options.dateFormat);
-                    scope.selectionDayTxt = fmt.replace(scope.config.YEAR_CONST, val.year)
-                        .replace(scope.config.MONTH_CONST, preZero(val.month))
-                        .replace(scope.config.DATE_CONST, preZero(val.day));
+                    var fmt = angular.copy(!angular.isUndefined(scope.options.dateFormat) ? scope.options.dateFormat : scope.cf.dateFormat);
+                    scope.selectionDayTxt = fmt.replace(scope.cf.YEAR_CONST, val.year)
+                        .replace(scope.cf.MONTH_CONST, preZero(val.month))
+                        .replace(scope.cf.DATE_CONST, preZero(val.day));
                 }
 
                 function preZero(val) {
@@ -270,7 +276,7 @@ angular.module('dpdatepicker', ["template-dpdatepicker-0.0.5.html"])
 
                 function monthText(m) {
                     // Returns mont as a text
-                    return scope.options.monthLabels[m];
+                    return getMonthLabels()[m];
                 }
 
                 function monthStartIdx(y, m) {
@@ -311,7 +317,7 @@ angular.module('dpdatepicker', ["template-dpdatepicker-0.0.5.html"])
                     var dInPrevM = daysInPrevMonth(m, y);
 
                     var dayNbr = 1;
-                    var cmo = scope.config.PREV_MONTH;
+                    var cmo = scope.cf.PREV_MONTH;
                     for (var i = 1; i < 7; i++) {
                         var week = [];
                         if (i === 1) {
@@ -328,7 +334,7 @@ angular.module('dpdatepicker', ["template-dpdatepicker-0.0.5.html"])
                                     sun: week.length === 0
                                 });
                             }
-                            cmo = scope.config.CURR_MONTH;
+                            cmo = scope.cf.CURR_MONTH;
                             // Current month
                             var daysLeft = 7 - week.length;
                             for (var j = 0; j < daysLeft; j++) {
@@ -349,7 +355,7 @@ angular.module('dpdatepicker', ["template-dpdatepicker-0.0.5.html"])
                                 if (dayNbr > dInThisM) {
                                     // Next month
                                     dayNbr = 1;
-                                    cmo = scope.config.NEXT_MONTH;
+                                    cmo = scope.cf.NEXT_MONTH;
                                 }
                                 week.push({
                                     day: dayNbr,
@@ -376,18 +382,27 @@ angular.module('dpdatepicker', ["template-dpdatepicker-0.0.5.html"])
                     }
                 }
 
+                function getMonthLabels() {
+                    return !angular.isUndefined(scope.options.monthLabels) ? scope.options.monthLabels : scope.cf.monthLabels;
+                }
+
+                function getDayLabels() {
+                    return !angular.isUndefined(scope.options.dayLabels) ? scope.options.dayLabels : scope.cf.dayLabels;
+                }
+
                 scope.$on('$destroy', function () {
                     $document.off("click", onOutClick);
                 });
 
                 function init() {
-                    // Selection element height
-                    scope.elemHeight = element.children().prop('offsetHeight') - 2;
+                    // Selection element height/width
+                    scope.height = !angular.isUndefined(attrs.height) ? attrs.height : scope.height;
+                    scope.width = !angular.isUndefined(attrs.width) ? attrs.width : scope.width;
 
                     // Weekdays to calendar - check is sunday first day in configuration
                     var days = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'];
                     for (var i in days) {
-                        scope.weekDays.push(scope.options.dayLabels[days[i]]);
+                        scope.weekDays.push(getDayLabels()[days[i]]);
                     }
 
                     // Initial selected date
@@ -431,7 +446,7 @@ angular.module('dpdatepicker', ["template-dpdatepicker-0.0.5.html"])
                                 tooltip = angular.element(tpl.data);
                                 pElem.prepend($compile(tooltip)(scope));
                             });
-                        }, scope.config.TOOLTIP_SHOW_DELAY);
+                        }, scope.cf.TOOLTIP_SHOW_DELAY);
                     }
                 }
 
