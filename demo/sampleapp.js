@@ -12,7 +12,6 @@ var sampleapp = angular.module('sampleapp', ['dpdatepicker']);
  */
 sampleapp.controller('samplectrl1', function ($scope) {
 
-
     function onDateSelect(year, month, day, formatted) {
         console.log('PARENT 1 - onDateSelect(): year: ', year, ' - month: ', month, ' - day: ', day, ' - formatted: ', formatted);
     }
@@ -20,36 +19,10 @@ sampleapp.controller('samplectrl1', function ($scope) {
     // Configuration of the dpdatepicker
     $scope.opt = {
         dateFormat: 'dd.mm.yyyy',
-        monthLabels: {
-            1: 'Jan',
-            2: 'Feb',
-            3: 'Mar',
-            4: 'Apr',
-            5: 'May',
-            6: 'Jun',
-            7: 'Jul',
-            8: 'Aug',
-            9: 'Sep',
-            10: 'Oct',
-            11: 'Nov',
-            12: 'Dec'
-        },
-        dayLabels: {
-            su: 'Sun',
-            mo: 'Mon',
-            tu: 'Tue',
-            we: 'Wed',
-            th: 'Thu',
-            fr: 'Fri',
-            sa: 'Sat'
-        },
-        sundayHighlight: true,
-        currentDayHighlight: true,
         closeOnSelect: true,
         footer: {
             visible: false
         },
-        todayBtnText: 'Today',
         dateSelectCb: onDateSelect
     };
 });
@@ -61,11 +34,9 @@ sampleapp.controller('samplectrl1', function ($scope) {
  */
 sampleapp.controller('samplectrl2', function ($scope) {
 
-
     function onDateSelect(year, month, day, formatted) {
         console.log('PARENT 2 - onDateSelect(): year: ', year, ' - month: ', month, ' - day: ', day, ' - formatted: ', formatted);
     }
-
 
     // Configuration of the dpdatepicker
     $scope.opt = {
@@ -79,33 +50,7 @@ sampleapp.controller('samplectrl2', function ($scope) {
             day: 16
         },
         dateFormat: 'yyyy-mm-dd',
-        monthLabels: {
-            1: 'Jan',
-            2: 'Feb',
-            3: 'Mar',
-            4: 'Apr',
-            5: 'May',
-            6: 'Jun',
-            7: 'Jul',
-            8: 'Aug',
-            9: 'Sep',
-            10: 'Oct',
-            11: 'Nov',
-            12: 'Dec'
-        },
-        dayLabels: {
-            su: 'Sun',
-            mo: 'Mon',
-            tu: 'Tue',
-            we: 'Wed',
-            th: 'Thu',
-            fr: 'Fri',
-            sa: 'Sat'
-        },
-        sundayHighlight: true,
-        currentDayHighlight: true,
         closeOnSelect: false,
-        todayBtnText: 'Today',
         footer: {
             visible: true,
             okBtnText: 'OK'
