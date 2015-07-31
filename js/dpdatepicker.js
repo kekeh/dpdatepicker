@@ -35,7 +35,7 @@ angular.module('dpdatepicker', [])
         NEXT_MONTH: 3,
         TOOLTIP_SHOW_DELAY: 600,
         HEIGHT: '30px',
-        WIDTH: '180px'
+        WIDTH: '140px'
     })
 
 /**

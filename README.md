@@ -37,7 +37,7 @@ angular.module('sampleapp', ['dpdatepicker']);
 | :------------ |:---------------|:---------------:|
 | options | dpdatepicker configuration object. See below. | yes |
 | ng-model | model object - selected date in a string format | no | 
-| width | width of the component (no selector). Can be pixels or percent for example: **width="20%"** or **width="250px"**. The default value is **180px**. | no | 
+| width | width of the component (no selector). Can be pixels or percent for example: **width="20%"** or **width="250px"**. The default value is **140px**. | no | 
 | height | height of the component (no selector). Can be pixels or percen for example: **height="100%"** or **height="30px"**. The default value is **30px**. | no | 
 
 ### Options data (an options attribute in the dpdatepicker directive)

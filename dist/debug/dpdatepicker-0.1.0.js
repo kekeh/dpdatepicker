@@ -5,13 +5,13 @@
 *  Author: kekeh 
 *  Homepage: http://kekeh.github.io/dpdatepicker 
 *  License: MIT 
-*  Date: 2015-07-30 
+*  Date: 2015-07-31 
 */ 
 angular.module('template-dpdatepicker-0.1.0.html', ['templates/dpdatepicker.html']);
 
 angular.module("templates/dpdatepicker.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/dpdatepicker.html",
-    "<div class=\"dpdatepicker\" ng-style=\"{'width':width, 'height': height}\">\n" +
+    "<div class=\"dpdatepicker\" ng-style=\"{'width':width}\">\n" +
     "    <div class=\"dpselectiongroup\" ng-click=\"picker($event)\">\n" +
     "        <span class=\"dpselection\" ng-style=\"{'line-height': height}\" ng-click=\"picker($event)\" tooltip-window>{{selectionDayTxt}}</span>\n" +
     "        <span class=\"dpselbtngroup\" ng-style=\"{'height': height}\">\n" +
@@ -99,7 +99,7 @@ angular.module('dpdatepicker', ["template-dpdatepicker-0.1.0.html"])
         NEXT_MONTH: 3,
         TOOLTIP_SHOW_DELAY: 600,
         HEIGHT: '30px',
-        WIDTH: '180px'
+        WIDTH: '140px'
     })
 
 /**
