@@ -2,11 +2,11 @@
   "author": "kekeh",
   "description": "Datepicker - AngularJS reusable UI component",
   "name": "dpdatepicker",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "homepage": "http://kekeh.github.io/dpdatepicker",
   "dependencies": {
-    "angular": "~1.3.x"
+    "angular": "~1.4.x"
   },
   "devDependencies": {
     "grunt": "~0.4.5",

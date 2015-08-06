@@ -1,17 +1,18 @@
 /* 
 *  Name: dpdatepicker 
 *  Description: Datepicker - AngularJS reusable UI component 
-*  Version: 0.1.0 
+*  Version: 0.1.1 
 *  Author: kekeh 
 *  Homepage: http://kekeh.github.io/dpdatepicker 
 *  License: MIT 
-*  Date: 2015-07-31 
+*  Date: 2015-08-06 
 */ 
-angular.module('template-dpdatepicker-0.1.0.html', ['templates/dpdatepicker.html']);
+angular.module('template-dpdatepicker-0.1.1.html', ['templates/dpdatepicker.html']);
 
 angular.module("templates/dpdatepicker.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/dpdatepicker.html",
     "<div class=\"dpdatepicker\" ng-style=\"{'width':width}\">\n" +
+    "    <div class=\"vstooltip\" ng-show=\"showTooltip\" ng-mouseleave=\"showTooltip=false\"><span class=\"vstooltiptext\">{{selectionDayTxt}}</span></div>\n" +
     "    <div class=\"dpselectiongroup\" ng-click=\"picker($event)\">\n" +
     "        <span class=\"dpselection\" ng-style=\"{'line-height': height}\" ng-click=\"picker($event)\" tooltip-window>{{selectionDayTxt}}</span>\n" +
     "        <span class=\"dpselbtngroup\" ng-style=\"{'height': height}\">\n" +
@@ -55,14 +56,10 @@ angular.module("templates/dpdatepicker.html", []).run(["$templateCache", functio
     "            <button class=\"dpfooterbtn\" ng-class=\"{'dpbtndisable': selectedDate.day===0}\" ng-disabled=\"selectedDate.day===0\" ng-click=\"accept()\">{{options.footer.okBtnText!==undefined?options.footer.okBtnText:cf.footer.okBtnText}}</button>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "\n" +
-    "    <script type=\"text/ng-template\" id=\"datepickertooltip.html\">\n" +
-    "        <div class=\"vstooltip\" ng-click=\"closeTooltip($event)\"><span class=\"vstooltiptext\">{{selectionDayTxt}}</span></div>\n" +
-    "    </script>\n" +
     "</div>");
 }]);
 
-angular.module('dpdatepicker', ["template-dpdatepicker-0.1.0.html"])
+angular.module('dpdatepicker', ["template-dpdatepicker-0.1.1.html"])
 
 /**
  * @ngdoc object
@@ -104,20 +101,6 @@ angular.module('dpdatepicker', ["template-dpdatepicker-0.1.0.html"])
 
 /**
  * @ngdoc object
- * @name dpdatepickerService
- * @description dpdatepickerService contain common code of the dpdatepicker.
- */
-    .service('dpdatepickerService', ['$http', '$templateCache', function ($http, $templateCache) {
-        this.getTemplate = function (name) {
-            var p = $http.get(name, {cache: $templateCache}).success(function (response) {
-                return response.data;
-            });
-            return p;
-        };
-    }])
-
-/**
- * @ngdoc object
  * @name dpdatepicker
  * @description dpdatepicker is main directive of the component and it implements the date picker.
  */
@@ -131,6 +114,7 @@ angular.module('dpdatepicker', ["template-dpdatepicker-0.1.0.html"])
             },
             controller: ['$scope', 'dpdatepickerConfig', function ($scope, dpdatepickerConfig) {
                 $scope.cf = dpdatepickerConfig;
+                $scope.showTooltip = false;
             }],
             link: function (scope, element, attrs) {
                 scope.weekDays = [], scope.dates = [];
@@ -254,6 +238,13 @@ angular.module('dpdatepicker', ["template-dpdatepicker-0.1.0.html"])
                         createMonth(newVal.monthNbr, newVal.year);
                     }
                 }, true);
+
+                scope.$watch('ngModel', function (newVal, oldVal) {
+                    // Listens the ngModel changes
+                    if (newVal !== oldVal && newVal === '') {
+                        scope.selectionDayTxt = newVal;
+                    }
+                });
 
                 function notifyParent(date) {
                     if (scope.options.dateSelectCb) {
@@ -425,53 +416,25 @@ angular.module('dpdatepicker', ["template-dpdatepicker-0.1.0.html"])
  * @name tooltipWindow
  * @description tooltipWindow directive implements the tooltip window.
  */
-    .directive('tooltipWindow', ['$compile', '$timeout', 'dpdatepickerService', function ($compile, $timeout, dpdatepickerService) {
+    .directive('tooltipWindow', ['$timeout', function ($timeout) {
         return {
             restrict: 'A',
             scope: false,
             link: function (scope, element, attrs) {
-                var pElem = null;
-                var tooltip = null;
-                var timer = null;
-
-                scope.closeTooltip = function (event) {
-                    event.stopPropagation();
-                    onMouseLeave();
-                };
-
                 function onMouseEnter() {
                     if (element[0].scrollWidth > element[0].offsetWidth) {
-                        timer = $timeout(function () {
-                            dpdatepickerService.getTemplate('datepickertooltip.html').then(function (tpl) {
-                                tooltip = angular.element(tpl.data);
-                                pElem.prepend($compile(tooltip)(scope));
-                            });
+                        $timeout(function () {
+                            scope.showTooltip = true;
                         }, scope.cf.TOOLTIP_SHOW_DELAY);
                     }
                 }
 
-                function onMouseLeave() {
-                    cancelTimer();
-                    if (tooltip !== null) {
-                        tooltip.remove();
-                        tooltip = null;
-                    }
-                }
-
-                function cancelTimer() {
-                    $timeout.cancel(timer);
-                    timer = null;
-                }
-
                 scope.$on('$destroy', function () {
-                    pElem.off('mouseenter', onMouseEnter);
-                    pElem.off('mouseleave', onMouseLeave);
+                    element.off('mouseenter', onMouseEnter);
                 });
 
                 function init() {
-                    pElem = element.parent();
-                    pElem.on('mouseenter', onMouseEnter);
-                    pElem.on('mouseleave', onMouseLeave);
+                    element.on('mouseenter', onMouseEnter);
                 }
 
                 init();

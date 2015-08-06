@@ -1,4 +1,4 @@
-# dpdatepicker v. 0.1.0
+# dpdatepicker v. 0.1.1
 
 **Datepicker - AngularJS reusable UI component**
 
@@ -7,10 +7,10 @@ Simple AngularJS directive which implements the date picker. Depends on only the
 
 ## Usage
 
-* include the **dpdatepicker-0.1.0.min.js** and the **dpdatepicker-0.1.0.min.css** files into your project. See the **Build project** and the **Installation** chapters below.
+* include the **dpdatepicker-0.1.1.min.js** and the **dpdatepicker-0.1.1.min.css** files into your project. See the **Build project** and the **Installation** chapters below.
 ```html
-<script src="dpdatepicker-0.1.0.min.js"></script>
-<link href="dpdatepicker-0.1.0.min.css" rel="stylesheet" type="text/css">
+<script src="dpdatepicker-0.1.1.min.js"></script>
+<link href="dpdatepicker-0.1.1.min.css" rel="stylesheet" type="text/css">
 ```
 * inject the **dpdatepicker** module into your application module.
 ```js
@@ -176,7 +176,7 @@ Example of the function. See description of the parameters below the example.
 In the **examples** folder of this project has the sample application and the online demo is [here](http://kekeh.github.io/dpdatepicker)
 
 ## Dependencies
-Depends on AngularJS. Implemented using the AngularJS version 1.3.17.
+Depends on AngularJS. Implemented using the AngularJS version 1.4.3.
 
 ## Build project
 * Build can be done by executing the **grunt** command. It creates the **dist/debug** and the **dist/min** folders and put files to these folders.
