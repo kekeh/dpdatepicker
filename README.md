@@ -1,4 +1,4 @@
-# dpdatepicker v. 0.1.1
+# dpdatepicker v. 0.1.2
 
 **Datepicker - AngularJS reusable UI component**
 
@@ -7,10 +7,10 @@ Simple AngularJS directive which implements the date picker. Depends on only the
 
 ## Usage
 
-* include the **dpdatepicker-0.1.1.min.js** and the **dpdatepicker-0.1.1.min.css** files into your project. See the **Build project** and the **Installation** chapters below.
+* include the **dpdatepicker-0.1.2.min.js** and the **dpdatepicker-0.1.2.min.css** files into your project. See the **Build project** and the **Installation** chapters below.
 ```html
-<script src="dpdatepicker-0.1.1.min.js"></script>
-<link href="dpdatepicker-0.1.1.min.css" rel="stylesheet" type="text/css">
+<script src="dpdatepicker-0.1.2.min.js"></script>
+<link href="dpdatepicker-0.1.2.min.css" rel="stylesheet" type="text/css">
 ```
 * inject the **dpdatepicker** module into your application module.
 ```js
@@ -197,7 +197,7 @@ bower install dpdatepicker
 * Opera 28.0
 * Mobile Safari 8
 
-## Licence
+## License
 * License: MIT
 
 ## Author
