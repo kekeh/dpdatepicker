@@ -18,6 +18,7 @@ sampleapp.controller('samplectrl1', function ($scope) {
 
     // Configuration of the dpdatepicker
     $scope.opt = {
+        firstDayOfWeek: 'mo',
         dateFormat: 'dd.mm.yyyy',
         closeOnSelect: true,
         footer: {
@@ -49,7 +50,6 @@ sampleapp.controller('samplectrl2', function ($scope) {
             month: 9,
             day: 16
         },
-        dateFormat: 'yyyy-mm-dd',
         closeOnSelect: false,
         footer: {
             visible: true,
