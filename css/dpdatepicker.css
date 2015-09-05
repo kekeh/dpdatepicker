@@ -17,11 +17,12 @@
     margin-top: 3px;
     margin-left: -1px;
     position: absolute;
-    max-width: 262px;
+    min-width: 210px;
+    max-width: 244px;
     padding: 3px;
     border-radius: 2px;
     background-color: #DDD;
-    z-index: 100;
+    z-index: 100000;
 }
 
 .dpdatepicker .dpselectiongroup {
@@ -141,7 +142,7 @@
 
 .dpdatepicker .dptable th {
     background-color: #DDD;
-    font-size: 12px;
+    font-size: 11px;
 }
 
 .dpdatepicker .dptable td {

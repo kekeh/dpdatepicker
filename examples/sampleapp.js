@@ -11,9 +11,7 @@ var sampleapp = angular.module('sampleapp', ['dpdatepicker']);
  * @description samplectrl1 is sampleapp 1.
  */
 sampleapp.controller('samplectrl1', function ($scope, dpdatepickerConfig) {
-
-    //dpdatepickerConfig.sunHighlight = false;
-
+    
     // Callback - called when the user selects/deselects the date from the UI
     function onDateSelect(year, month, day, formatted) {
         console.log('PARENT 1 - onDateSelect(): year: ', year, ' - month: ', month, ' - day: ', day, ' - formatted: ', formatted);
@@ -21,6 +19,8 @@ sampleapp.controller('samplectrl1', function ($scope, dpdatepickerConfig) {
 
     // Configuration of the dpdatepicker
     $scope.opt = {
+        firstDayOfWeek: 'mo',
+        dateFormat: 'dd.mm.yyyy',
         closeOnSelect: true,
         footer: {
             visible: false
