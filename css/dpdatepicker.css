@@ -152,6 +152,7 @@
 
 .dpdatepicker .dpprevmonth {
     color: #CCC;
+    font-weight: normal;
 }
 
 .dpdatepicker .dpcurrmonth {
@@ -161,6 +162,7 @@
 
 .dpdatepicker .dpnextmonth {
     color: #CCC;
+    font-weight: normal;
 }
 
 .dpdatepicker .dpsunday {
@@ -168,7 +170,7 @@
 }
 
 .dpdatepicker .dpcurrmonth {
-    background-color: #FAFAFA;
+    background-color: #F7F7F7;
 }
 
 .dpdatepicker .dpcurrday {
@@ -196,11 +198,16 @@
 .dpdatepicker .dpheader,
 .dpdatepicker .dpfooterarea,
 .dpdatepicker .dptable,
+.dpdatepicker .dptable tbody,
 .dpdatepicker .dptable th,
 .dpdatepicker .dptable td,
 .dpdatepicker .dpheadertodaybtn,
 .dpdatepicker .dpfooterbtn {
     border: 1px solid #AAA;
+}
+
+.dpdatepicker .dpnogrid {
+    border: none !important;
 }
 
 .dpdatepicker .dpbtnpicker,

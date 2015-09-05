@@ -1,4 +1,4 @@
-# dpdatepicker v. 0.1.3
+# dpdatepicker v. 0.1.4
 
 **Datepicker - AngularJS reusable UI component**
 
@@ -7,10 +7,10 @@ Simple AngularJS directive which implements the date picker. Depends on only the
 
 ## Usage
 
-* include the **dpdatepicker-0.1.3.min.js** and the **dpdatepicker-0.1.3.min.css** files into your project. See the **Build project** and the **Installation** chapters below.
+* include the **dpdatepicker-0.1.4.min.js** and the **dpdatepicker-0.1.4.min.css** files into your project. See the **Build project** and the **Installation** chapters below.
 ```html
-<script src="dpdatepicker-0.1.3.min.js"></script>
-<link href="dpdatepicker-0.1.3.min.css" rel="stylesheet" type="text/css">
+<script src="dpdatepicker-0.1.4.min.js"></script>
+<link href="dpdatepicker-0.1.4.min.css" rel="stylesheet" type="text/css">
 ```
 * inject the **dpdatepicker** module into your application module.
 ```js
@@ -52,6 +52,7 @@ angular.module('sampleapp', ['dpdatepicker']);
 | **monthLabels** | Object which contain month names. Shown in selector. | strings | Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec | no |
 | **dayLabels** | Object which contain weekday names. Shown in selector. | strings | Sun, Mon, Tue, Wed, Thu, Fri, Sat | no | |
 | **firstDayOfWeek** | First day of week shown in selector. | One string of the following: su, mo, tu, we, th, fr, sa | su | no | 
+| **showGrid** | Is grid visible or not on the selector. | true or false | true | no |
 | **currDayHighlight** | Is current day highlighted. | true or false | true | no |
 | **sunHighlight** | Is sundays highlighted or not. | true or false | true | no |
 | **closeOnSelect** | Is selector closed on date click or not. | true or false | false | no |
@@ -113,6 +114,7 @@ sampleapp.controller('sampleappctrl', function ($scope, dpdatepickerConfig) {
             sa: 'Sat'
         },
         firstDayOfWeek: 'mo',
+        showGrid: false,
         todayBtnText: 'Today',
         sunHighlight: true,
         currDayHighlight: true,
