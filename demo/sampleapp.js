@@ -50,6 +50,7 @@ sampleapp.controller('samplectrl2', function ($scope) {
             month: 9,
             day: 16
         },
+        showGrid: false,
         closeOnSelect: false,
         footer: {
             visible: true,
